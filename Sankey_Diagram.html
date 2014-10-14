@@ -94,7 +94,11 @@ var sankey = d3.sankey()
 
 var path = sankey.link();
 
-d3.json("agriculture_P.json", function(agri_P) {
+//var jsonFile = "agriculture_P.json";
+var jsonFile = "agriculture_biomass.json";
+
+
+d3.json(jsonFile, function(agri_P) {
 
   sankey
       .nodes(agri_P.nodes)
@@ -128,8 +132,8 @@ d3.json("agriculture_P.json", function(agri_P) {
       .attr("width", sankey.nodeWidth())
       .style("fill", "steelblue")
       .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
-    .append("title")
-      .text(function(d) { return d.name + "\n" + format(d.value); });
+      .append("title")
+      .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Net addition to stock: "; }); //Changing the labels on the processes
 
   node.append("text")
       .attr("x", -6)
