@@ -61,9 +61,12 @@
 
 <title>Norwegian P model: Prototype</title>
 
-<p id="chart">
+<h1>Remove dataset</h1>
+<h2>Update dataset</h2>
 
-</p><footer>
+<p id="chart"></p>
+
+<footer>
   <aside>October, 2014</aside>
   <p>This is a <a href="http://www.ntnu.no">NTNU</a> project by Richard Rud using the D3.js library</p>
 </footer>
@@ -94,19 +97,41 @@ var sankey = d3.sankey()
 
 var path = sankey.link();
 
-//var jsonFile = "agriculture_P.json";
-var jsonFile = "agriculture_biomass.json";
 
+ var jsonFile = "agriculture_P.json";
 
-d3.json(jsonFile, function(agri_P) {
+ readFile(jsonFile);
+
+//When text is clicke update the dataset
+
+d3.select("h1").on("click", function() {
+
+  d3.select("svg").remove();
+
+ 
+  });
+
+d3.select("h2").on("click", function() {
+
+  var jsonFile2 = "agriculture_biomass.json";
+
+  readFile(jsonFile2);
+
+  });
+
+function readFile(file) {
+
+var test = file;
+
+d3.json(test, function(data) {
 
   sankey
-      .nodes(agri_P.nodes)
-      .links(agri_P.links)
+      .nodes(data.nodes)
+      .links(data.links)
       .layout(32);
 
   var link = svg.append("g").selectAll(".link")
-      .data(agri_P.links)
+      .data(data.links)
     .enter().append("path")
       //.attr("class", "link")
       .attr("class", function(d) { return (d.causesCycle ? "cycleLink" : "link") })
@@ -118,7 +143,7 @@ d3.json(jsonFile, function(agri_P) {
       .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
 
   var node = svg.append("g").selectAll(".node")
-      .data(agri_P.nodes)
+      .data(data.nodes)
     .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
@@ -155,9 +180,12 @@ d3.json(jsonFile, function(agri_P) {
 
   }
 
-//test
+   
 
 });
+
+};
+  
 
 </script>
 
