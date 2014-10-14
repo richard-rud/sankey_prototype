@@ -1,0 +1,15 @@
+{"nodes":[
+{"name":"Fertilizer production"},          
+{"name":"Agriculture soils"},  
+{"name":"Agriculture"},                     
+{"name":"Husbandry feed"}        
+],
+"links":[
+{"source":0,"target":1,"value":25},
+{"source":0,"target":1,"value":84},
+{"source":1,"target":2,"value":120},
+{"source":2,"target":1,"value":3},
+{"source":2,"target":1,"value":120},
+{"source":3,"target":2,"value":96},
+{"source":2,"target":3,"value":42}
+]}
