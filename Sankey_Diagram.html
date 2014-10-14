@@ -61,8 +61,9 @@
 
 <title>Norwegian P model: Prototype</title>
 
-<h1>Remove dataset</h1>
-<h2>Update dataset</h2>
+<h1>Show dataset 1</h1>
+<h2>Show dataset 2</h2>
+<h3>Remove dataset</h3>
 
 <p id="chart"></p>
 
@@ -97,18 +98,14 @@ var sankey = d3.sankey()
 
 var path = sankey.link();
 
-
- var jsonFile = "agriculture_P.json";
-
- readFile(jsonFile);
-
 //When text is clicke update the dataset
 
 d3.select("h1").on("click", function() {
 
-  d3.select("svg").remove();
+  var jsonFile1 = "agriculture_P.json";
 
- 
+  readFile(jsonFile1);
+
   });
 
 d3.select("h2").on("click", function() {
@@ -116,6 +113,12 @@ d3.select("h2").on("click", function() {
   var jsonFile2 = "agriculture_biomass.json";
 
   readFile(jsonFile2);
+
+  });
+
+d3.select("h3").on("click", function() {
+
+  d3.select("svg").remove();
 
   });
 
