@@ -6,7 +6,7 @@
 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
 <title>Sankey Diagram</title>
 
@@ -161,7 +161,7 @@ d3.json(inputFile, function(data) {
       .attr("d", path)
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; })
-      .style("stroke","#942600");
+      .style("stroke","#ef8a62");
 
 
 
@@ -181,10 +181,12 @@ d3.json(inputFile, function(data) {
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", "#942600")
+      .style("fill", "#ef8a62")
       .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
       .append("title")
-      .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Net addition to stock: "; }); //Changing the labels on the processes
+      .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Stock: " + format(d.stock); }); //Changing the labels on the processes
+
+
 
   node.append("text")
       .attr("x", -6)
@@ -248,7 +250,7 @@ d3.json(inputFile, function(data) {
       .attr("d", path)
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; })
-      .style("stroke","#6D9400");
+      .style("stroke","#91cf60");
 
   link.append("title")
       .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
@@ -258,7 +260,7 @@ d3.json(inputFile, function(data) {
     .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-    .call(d3.behavior.drag()
+      .call(d3.behavior.drag()
       .origin(function(d) { return d; })
       .on("dragstart", function() { this.parentNode.appendChild(this); })
       .on("drag", dragmove));
@@ -266,7 +268,7 @@ d3.json(inputFile, function(data) {
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", "#6D9400")
+      .style("fill", "#91cf60")
       .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
       .append("title")
       .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Net addition to stock: "; }); //Changing the labels on the processes
