@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html><head>
+<html>
+
+<head>
+
+
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 <title>Sankey Diagram</title>
+
 <style>
 
-#chart {
-  height: 500px;
-  /*background-color: #252525;*/
+body {
   background-color: none;
 }
 
-#dataset1 {
-
+#chart {
+  height: 600px;
+  width: 1200px;
+  margin: 20px;
+  background-color: white;
+  border: solid;
+  border-style: groove;
 }
 
-#dataset2 {
+#buttonsStyle {
 
-}
+margin: 24px;
+padding: 10px;
+border: solid;
+border-style: groove;
 
-#removeData {
-  background-color: red;
 }
 
 .node rect {
   cursor: move;
   fill-opacity: .9;
-  shape-rendering: crispEdges;
+  /*shape-rendering: crispEdges;*/
 }
 
 .node text {
@@ -36,7 +48,7 @@
 
 .link {
   fill: none;
-  stroke: steelblue;
+  /*stroke: steelblue;*/
   stroke-opacity: .2;
 }
 
@@ -44,7 +56,7 @@
 
 .cycleLink {
   fill: none;
-  stroke: green;
+  /*stroke: green;*/
   stroke-opacity: .20;
 }
  
@@ -72,9 +84,13 @@
 
 <title>Norwegian P model: Prototype</title>
 
-<button id="dataset1" type="button">Show dataset 1</button>
-<button id="dataset2" type="button">Show dataset 2</button>
-<button id="removeData" type="button">Remove dataset</button>
+<div id="buttonsStyle" class="btn-group">
+  
+<button id="dataset1" class="btn btn-success">Show dataset 1</button>
+<button id="dataset2" class="btn btn-success" type="button">Show dataset 2</button>
+<button id="removeData" class="btn btn-danger" type="button">Remove dataset</button>
+
+</div>
 
 <p id="chart"></p>
 
@@ -87,11 +103,12 @@
 <script src="d3.js"></script>
 <script src="sankey.js"></script>
 <script src="mySankey.js"></script>
+
 <script>
 
 var margin = {top: 60, right: 100, bottom: 60, left: 100},
-    width = 960 - margin.left - margin.right,
-    height = 540 - margin.top - margin.bottom;
+    width = 1200 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
 var formatNumber = d3.format(",.0f"),
     format = function(d) { return formatNumber(d) + " tons"; },
@@ -100,7 +117,7 @@ var formatNumber = d3.format(",.0f"),
 var svg = d3.select("#chart").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var sankey = d3.sankey()
@@ -114,7 +131,7 @@ var path = sankey.link();
 
 d3.select("#dataset1").on("click", function() {
 
-  var jsonFile1 = "agriculture_P.json";
+  var jsonFile1 = "dataset1.json"  
 
   readFile(jsonFile1);
 
@@ -124,84 +141,7 @@ d3.select("#dataset1").on("click", function() {
 
 var inputFile = file;
 
-d3.json(inputFile, function(data) {
 
-  sankey
-      .nodes(data.nodes)
-      .links(data.links)
-      .layout(32);
-
-  var link = svg.append("g").selectAll(".link")
-      .data(data.links)
-    .enter().append("path")
-      //.attr("class", "link")
-      .attr("class", function(d) { return (d.causesCycle ? "cycleLink" : "link") })
-      .attr("d", path)
-      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-      .sort(function(a, b) { return b.dy - a.dy; });
-
-  link.append("title")
-      .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
-
-  var node = svg.append("g").selectAll(".node")
-      .data(data.nodes)
-    .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-    .call(d3.behavior.drag()
-      .origin(function(d) { return d; })
-      .on("dragstart", function() { this.parentNode.appendChild(this); })
-      .on("drag", dragmove));
-
-  node.append("rect")
-      .attr("height", function(d) { return d.dy; })
-      .attr("width", sankey.nodeWidth())
-      .style("fill", "steelblue")
-      .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
-      .append("title")
-      .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Net addition to stock: "; }); //Changing the labels on the processes
-
-  node.append("text")
-      .attr("x", -6)
-      .attr("y", function(d) { return d.dy / 2; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", "end")
-      .attr("transform", null)
-      .text(function(d) { return d.name; })
-    .filter(function(d) { return d.x < width / 2; })
-      .attr("x", 6 + sankey.nodeWidth())
-      .attr("text-anchor", "start");
-  
-  function dragmove(d) {
-    // This attribute values return first the highest value in Math.max and then the lowest value in Math.min
-    //d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
-    d3.select(this).attr("transform", "translate(" + (d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))) + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
-    sankey.relayout();
-    link.attr("d", path);
-
-  }
-
-   
-
-});
-
-};
-
-  //////////////////////////////
-
-  });
-
-d3.select("#dataset2").on("click", function() {
-
-  var jsonFile2 = "agriculture_biomass.json"  
-
-  readFile(jsonFile2);
-
-  //////////////////////////////
-
-  function readFile(file) {
-
-var inputFile = file;
 
 d3.json(inputFile, function(data) {
 
@@ -218,7 +158,9 @@ d3.json(inputFile, function(data) {
       .attr("d", path)
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; })
-      .style("stroke","rgb(255, 127, 0)");
+      .style("stroke","#942600");
+
+
 
   link.append("title")
       .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
@@ -236,7 +178,92 @@ d3.json(inputFile, function(data) {
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", "steelblue")
+      .style("fill", "#942600")
+      .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
+      .append("title")
+      .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Net addition to stock: "; }); //Changing the labels on the processes
+
+  node.append("text")
+      .attr("x", -6)
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .attr("transform", null)
+      .text(function(d) { return d.name; })
+    .filter(function(d) { return d.x < width / 2; })
+      .attr("x", 6 + sankey.nodeWidth())
+      .attr("text-anchor", "start");
+  
+  function dragmove(d) {
+
+    d3.select(this).attr("transform", "translate(" + (d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))) + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+    sankey.relayout();
+    link.attr("d", path);
+
+  }
+
+   
+
+});
+
+
+
+};
+
+  /////////////////////////////
+
+  });
+
+////////////////////////////////////////////////////
+
+d3.select("#dataset2").on("click", function() {
+
+  var jsonFile2 = "dataset2.json"  
+
+  readFile(jsonFile2);
+
+  //////////////////////////////
+
+  function readFile(file) {
+
+var inputFile = file;
+
+
+
+d3.json(inputFile, function(data) {
+
+  sankey
+      .nodes(data.nodes)
+      .links(data.links)
+      .layout(32);
+
+  var link = svg.append("g").selectAll(".link")
+      .data(data.links)
+    .enter().append("path")
+      //.attr("class", "link")
+      .attr("class", function(d) { return (d.causesCycle ? "cycleLink" : "link") })
+      .attr("d", path)
+      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+      .sort(function(a, b) { return b.dy - a.dy; })
+      .style("stroke","#6D9400");
+
+  link.append("title")
+      .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
+
+  var node = svg.append("g").selectAll(".node")
+      .data(data.nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+    .call(d3.behavior.drag()
+      .origin(function(d) { return d; })
+      .on("dragstart", function() { this.parentNode.appendChild(this); })
+      .on("drag", dragmove));
+
+  node.append("rect")
+      .attr("height", function(d) { return d.dy; })
+      .attr("width", sankey.nodeWidth())
+      .style("fill", "#6D9400")
       .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
       .append("title")
       .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Net addition to stock: "; }); //Changing the labels on the processes
