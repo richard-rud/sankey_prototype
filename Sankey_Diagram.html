@@ -185,7 +185,7 @@ d3.json(inputFile, function(data) {
       .style("fill", "#ef8a62")
       .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
       .append("title")
-      .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Stock: " + format(d.type); }); //Changing the labels on the processes
+      .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Stock: " + format(d.stock); }); //Changing the labels on the processes
 
 
 
