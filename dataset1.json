@@ -1,12 +1,9 @@
 {"nodes":[
-{"name":"Fertilizer production dataset 1"},          
-{"name":"Agriculture soils dataset 1"},  
-{"name":"Agriculture dataset 1"},                     
-{"name":"Husbandry feed dataset 1"}  
+{"name":"Drymatter process A"},
+{"name":"Drymatter process B"}            
 ],
-"links":[{"source":0,"target":1,"value":10},
-{"source":1,"target":2,"value":5},
-{"source":2,"target":1,"value":3},
-{"source":3,"target":2,"value":30}
+"links":[{"source":0,"target":1,"value":10,"type":"Phosphorus"},
+{"source":0,"target":1,"value":5,"type":"Nitrogen"},
+{"source":0,"target":1,"value":3,"type":"Carbon"}
 ]}
 

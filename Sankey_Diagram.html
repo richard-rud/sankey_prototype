@@ -104,7 +104,7 @@ footer {
 
 <!--<script src="http://d3js.org/d3.v2.js"></script>-->
 <script src="d3.js"></script>
-<script src="sankey.js"></script>
+<!--<script src="sankey.js"></script>-->
 <script src="mySankey.js"></script>
 
 <script>
@@ -152,28 +152,29 @@ d3.json(inputFile, function(data) {
       .nodes(data.nodes)
       .links(data.links)
       .layout(32);
+ 
+ var color = d3.scale.category20();
 
   var link = svg.append("g").selectAll(".link")
       .data(data.links)
-    .enter().append("path")
+      .enter().append("path")
       //.attr("class", "link")
       .attr("class", function(d) { return (d.causesCycle ? "cycleLink" : "link") })
       .attr("d", path)
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; })
-      .style("stroke","#ef8a62");
-
-
-
+      //.style("stroke", "#ef8a62")
+      .style("stroke", function(d,i){return color(i);});
+  
   link.append("title")
-      .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
+      .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value) + "\nType: " + d.type; });
 
   var node = svg.append("g").selectAll(".node")
       .data(data.nodes)
-    .enter().append("g")
+      .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-    .call(d3.behavior.drag()
+      .call(d3.behavior.drag()
       .origin(function(d) { return d; })
       .on("dragstart", function() { this.parentNode.appendChild(this); })
       .on("drag", dragmove));
@@ -184,7 +185,7 @@ d3.json(inputFile, function(data) {
       .style("fill", "#ef8a62")
       .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
       .append("title")
-      .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Stock: " + format(d.stock); }); //Changing the labels on the processes
+      .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Stock: " + format(d.type); }); //Changing the labels on the processes
 
 
 
@@ -195,7 +196,7 @@ d3.json(inputFile, function(data) {
       .attr("text-anchor", "end")
       .attr("transform", null)
       .text(function(d) { return d.name; })
-    .filter(function(d) { return d.x < width / 2; })
+      .filter(function(d) { return d.x < width / 2; })
       .attr("x", 6 + sankey.nodeWidth())
       .attr("text-anchor", "start");
   
@@ -205,21 +206,13 @@ d3.json(inputFile, function(data) {
     sankey.relayout();
     link.attr("d", path);
 
-  }
-
-   
-
-});
-
-
-
-};
-
-  /////////////////////////////
+    }
 
   });
 
-////////////////////////////////////////////////////
+};
+
+  });
 
 d3.select("#dataset2").on("click", function() {
 
@@ -227,24 +220,20 @@ d3.select("#dataset2").on("click", function() {
 
   readFile(jsonFile2);
 
-  //////////////////////////////
-
   function readFile(file) {
 
-var inputFile = file;
-
-
+  var inputFile = file;
 
 d3.json(inputFile, function(data) {
 
-  sankey
+      sankey
       .nodes(data.nodes)
       .links(data.links)
       .layout(32);
 
   var link = svg.append("g").selectAll(".link")
       .data(data.links)
-    .enter().append("path")
+      .enter().append("path")
       //.attr("class", "link")
       .attr("class", function(d) { return (d.causesCycle ? "cycleLink" : "link") })
       .attr("d", path)
@@ -257,7 +246,7 @@ d3.json(inputFile, function(data) {
 
   var node = svg.append("g").selectAll(".node")
       .data(data.nodes)
-    .enter().append("g")
+      .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
       .call(d3.behavior.drag()
@@ -280,7 +269,7 @@ d3.json(inputFile, function(data) {
       .attr("text-anchor", "end")
       .attr("transform", null)
       .text(function(d) { return d.name; })
-    .filter(function(d) { return d.x < width / 2; })
+      .filter(function(d) { return d.x < width / 2; })
       .attr("x", 6 + sankey.nodeWidth())
       .attr("text-anchor", "start");
   

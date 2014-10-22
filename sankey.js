@@ -42,6 +42,7 @@ d3.sankey = function() {
     computeNodeBreadths();
     computeNodeDepths(iterations);
     computeLinkDepths();
+
     return sankey;
   };
 
@@ -82,6 +83,7 @@ d3.sankey = function() {
     nodes.forEach(function(node) {
       node.sourceLinks = [];
       node.targetLinks = [];
+      node.compositionLinks = [];
     });
     links.forEach(function(link) {
       var source = link.source,
@@ -90,6 +92,7 @@ d3.sankey = function() {
       if (typeof target === "number") target = link.target = nodes[link.target];
       source.sourceLinks.push(link);
       target.targetLinks.push(link);
+      composition.compositionLinks.push(link);
     });
   }
 
@@ -102,6 +105,9 @@ d3.sankey = function() {
       );
     });
   }
+
+
+
 
   // Iteratively assign the breadth (x-position) for each node.
   // Nodes are assigned the maximum breadth of incoming neighbors plus one;
