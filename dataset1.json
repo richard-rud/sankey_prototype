@@ -7,7 +7,7 @@
 {"source":0,"target":1,"value":2,"type":"Nitrogen"},
 {"source":0,"target":1,"value":6,"type":"Rest"},
 {"source":1,"target":2,"value":1,"type":"Phosphorus"},
-{"source":1,"target":2,"value":1,"type":"Nitrogen"},
-{"source":1,"target":2,"value":7,"type":"Rest"}
+{"source":1,"target":2,"value":2,"type":"Nitrogen"},
+{"source":1,"target":2,"value":12,"type":"Rest"}
 ]}
 

@@ -126,8 +126,8 @@ var svg = d3.select("#chart").append("svg")
 var sankey = d3.sankey()
     .nodeWidth(40)
     .nodePadding(10)
-    .size([900, 300]);
-
+    .size([width, height]);
+    
 var path = sankey.link();
 
 //When text is clicke update the dataset
