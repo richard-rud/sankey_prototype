@@ -242,6 +242,10 @@ d3.sankey = function() {
     });
   }
 
+    //////////////////////////////////////////////////////////
+    //Fundtion for creating the depth (height) of the nodes//
+    ////////////////////////////////////////////////////////
+
   function computeNodeDepths(iterations) {
     var nodesByBreadth = d3.nest()
         .key(function(d) { return d.x; })
@@ -266,12 +270,14 @@ d3.sankey = function() {
       nodesByBreadth.forEach(function(nodes) {
         nodes.forEach(function(node, i) {
           node.y = i;
-          node.dy = node.value * ky;
+          //node.dy = node.value * ky;
+          node.dy = node.value;
         });
       });
 
       links.forEach(function(link) {
-        link.dy = link.value * ky;
+        //link.dy = link.value * ky;
+        link.dy = link.value;
       });
     }
 
@@ -342,6 +348,10 @@ d3.sankey = function() {
       return a.y - b.y;
     }
   }
+
+    /////////////////////////////////////////
+    // End funtion for creating node height//
+    ////////////////////////////////////////
 
   function computeLinkDepths() {
     nodes.forEach(function(node) {

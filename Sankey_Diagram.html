@@ -110,6 +110,19 @@ footer {
 
 <script>
 
+//Create scale functions
+      var xScale = d3.scale.linear()
+                 .domain([1, 1000])
+                 .range([1, 1000]);
+
+      var yScale = d3.scale.linear()
+                 .domain([1, 400])
+                 .range([1, 400]);
+
+
+
+
+
 var margin = {top: 60, right: 100, bottom: 60, left: 100},
     width = 1200 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
@@ -152,9 +165,9 @@ function readFile(file) {
             .append("path")
             .attr("class", function(d) { return (d.causesCycle ? "cycleLink" : "link") })
             .attr("d", path)
-            .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+            .style("stroke-width", function(d) { return yScale(Math.max(1, d.dy)); })
             .sort(function(a, b) { return b.dy - a.dy; })
-            .style("stroke", function(d,i) {return color(i);})
+            .style("stroke", function(d,i) {return color(i);});
   
         link.append("title")
             .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value) + "\nType: " + d.type; });
@@ -170,7 +183,7 @@ function readFile(file) {
             .on("drag", dragmove));
 
         node.append("rect") 
-            .attr("height", function(d) { return d.dy; })
+            .attr("height", function(d) { return yScale(d.dy); })
             .attr("width", sankey.nodeWidth())
             .style("fill", "#ef8a62")
             .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
