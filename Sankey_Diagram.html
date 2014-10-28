@@ -3,12 +3,11 @@
 
 <head>
 
-
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
-<title>Sankey Diagram</title>
+<title>Sankey project NTNU</title>
 
 <style>
 
@@ -26,10 +25,8 @@ body {
 }
 
 #buttonsStyle {
-
 margin: 24px;
 padding: 10px;
-
 }
 
 footer {
@@ -75,6 +72,36 @@ footer {
   stroke-opacity: .50;
 }
 
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
 </style>
 
 </head>
@@ -89,14 +116,14 @@ footer {
 
 <div id="buttonsStyle">
   
-<button id="dataset1" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-open"></span> Show dataset 1</button>
-<button id="dataset2" class="btn btn-success btn-lg" type="button"><span class="glyphicon glyphicon-floppy-open"></span> Show dataset 2</button>
+<button id="dataset1" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-open"></span> Show data (components)</button>
+<button id="dataset2" class="btn btn-success btn-lg" type="button"><span class="glyphicon glyphicon-floppy-open"></span> Show data (Feedback loop)</button>
 <button id="showAllDatasets" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-open"></span> Show all datasets</button>
 <button id="removeData" class="btn btn-danger btn-lg" type="button"><span class="glyphicon glyphicon-floppy-remove"></span> Remove datasets</button>
-<a href="index.html"><button id="removeData" class="btn btn-warning btn-lg" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Back</button></a>
+<a href="index.html"><button class="btn btn-warning btn-lg" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Back</button></a>
+<button onclick="helpFunction()" class="btn btn-info btn-lg" type="button"><span class="glyphicon glyphicon-info-sign"></span> Help</button></a>
 
 </div>
-
 
 <p id="chart"></p>
 
@@ -107,17 +134,17 @@ footer {
 
 <script src="d3.js"></script>
 <script src="mySankey.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
 <script>
 
-//Create scale functions
-      /*var xScale = d3.scale.linear()
-                 .domain([1, 1000])
-                 .range([1, 1000]);*/
+function helpFunction() {
+    alert("This prototype uses two datasets with random values. To see more information, move your mouse over the flow or process you are interested in. You can also rearrange the processes by pressing your mouse and drag it around.");
+}
 
-      var yScale = d3.scale.linear()
-                 .domain([1, 400])
-                 .range([1, 400]);
+var yScale = d3.scale.linear()
+            .domain([1, 400])
+            .range([1, 400]);
 
 var margin = {top: 60, right: 100, bottom: 60, left: 100},
     width = 1200 - margin.left - margin.right,
@@ -133,10 +160,27 @@ var svg = d3.select("#chart").append("svg")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+var tip_1 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p><span style='color:white'>" + d.source.name + " → " + d.target.name + "</p>" + "</p>" + format(d.value) + "</p>" + "Type: " + d.type + "</span>";
+  });
+
+  svg.call(tip_1);
+
+  var tip_2 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p><span style='color:white'>" + d.name + "</p>" + format(d.value) + "<p>" + "</p>" + "Stock: " + format(d.stock) + "</span>";
+  })
+
+  svg.call(tip_2);
+
 var sankey = d3.sankey()
     .nodeWidth(30)
     .nodePadding(0)
-    //.size([width, height]);
     .size([width, height]);
     
 
@@ -153,8 +197,6 @@ function readFile(file) {
           .links(graph.links)
           .layout(30);
       
-
-
         var link = svg.append("g").selectAll(".link")
             .data(graph.links)
             .enter()
@@ -163,15 +205,10 @@ function readFile(file) {
             .attr("d", path)
             .style("stroke-width", function(d) { return yScale(Math.max(1, d.dy)); })
             .sort(function(a, b) { return b.dy - a.dy; })
-            //.style("stroke", function(d,i) {return color(i);});
-            //.style("stroke", function(d,i) { return d3.rgb(color(i)).brighter(2); });
-            .style("stroke", function(d) {return d.colorType}); 
-
-
-  
-        link.append("title")
-            .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value) + "\nType: " + d.type; });
-
+            .style("stroke", function(d) {return d.colorType})
+            .on('mouseover', tip_1.show)
+            .on('mouseout', tip_1.hide); 
+ 
         var node = svg.append("g").selectAll(".node")
             .data(graph.nodes)
             .enter()
@@ -181,16 +218,17 @@ function readFile(file) {
             .call(d3.behavior.drag()
             .origin(function(d) { return d; })
             .on("dragstart", function() { this.parentNode.appendChild(this); })
-            .on("drag", dragmove));
+            .on("drag", dragmove))
+            .on('mouseover', tip_2.show)
+            .on('mouseout', tip_2.hide);
 
         node.append("rect") 
             .attr("height", function(d) { return yScale(d.dy); })
             .attr("width", sankey.nodeWidth())
             .style("fill", "#ef8a62")
             .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
-            .append("title")
-            .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Stock: " + format(d.stock); }); //Changing the labels on the processes
-
+            .append("title");
+           
         node.append("text")
             .attr("x", -6)
             .attr("y", function(d) { return d.dy / 2; })
@@ -201,7 +239,6 @@ function readFile(file) {
             .filter(function(d) { return d.x < width / 2; })
             .attr("x", 6 + sankey.nodeWidth())
             .attr("text-anchor", "start");
-  
   
     function dragmove(d) {
 

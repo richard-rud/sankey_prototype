@@ -1,14 +1,22 @@
 {"nodes":[
 {"name":"Drymatter process A","stock":4},
 {"name":"Drymatter process B","stock":0},
-{"name":"Drymatter process C","stock":100}            
+{"name":"Drymatter process C","stock":100},   
+{"name":"Drymatter process D","stock":0},
+{"name":"Drymatter process E","stock":0}        
 ],
 "links":[{"source":0,"target":1,"value":10,"type":"Phosphorus","colorType":"red"},
 {"source":0,"target":1,"value":10,"type":"Nitrogen","colorType":"green"},
 {"source":0,"target":1,"value":10,"type":"Rest","colorType":"blue"},
 {"source":1,"target":2,"value":10,"type":"Phosphorus","colorType":"red"},
 {"source":1,"target":2,"value":50,"type":"Nitrogen","colorType":"green"},
-{"source":1,"target":2,"value":100,"type":"Rest","colorType":"blue"}
+{"source":1,"target":2,"value":100,"type":"Rest","colorType":"blue"},
+{"source":2,"target":3,"value":5,"type":"Phosphorus","colorType":"red"},
+{"source":2,"target":3,"value":50,"type":"Nitrogen","colorType":"green"},
+{"source":2,"target":3,"value":25,"type":"Rest","colorType":"blue"},
+{"source":3,"target":4,"value":10,"type":"Phosphorus","colorType":"red"},
+{"source":3,"target":4,"value":32,"type":"Nitrogen","colorType":"green"},
+{"source":3,"target":4,"value":5,"type":"Rest","colorType":"blue"}
 ]}
 
 
