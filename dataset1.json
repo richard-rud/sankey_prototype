@@ -3,12 +3,12 @@
 {"name":"Drymatter process B","stock":0},
 {"name":"Drymatter process C","stock":100}            
 ],
-"links":[{"source":0,"target":1,"value":100,"type":"Phosphorus test"},
-{"source":0,"target":1,"value":200,"type":"Nitrogen"},
-{"source":0,"target":1,"value":100,"type":"Rest"},
-{"source":1,"target":2,"value":10,"type":"Phosphorus"},
-{"source":1,"target":2,"value":50,"type":"Nitrogen"},
-{"source":1,"target":2,"value":100,"type":"Rest"}
+"links":[{"source":0,"target":1,"value":10,"type":"Phosphorus","colorType":"red"},
+{"source":0,"target":1,"value":10,"type":"Nitrogen","colorType":"green"},
+{"source":0,"target":1,"value":10,"type":"Rest","colorType":"blue"},
+{"source":1,"target":2,"value":10,"type":"Phosphorus","colorType":"red"},
+{"source":1,"target":2,"value":50,"type":"Nitrogen","colorType":"green"},
+{"source":1,"target":2,"value":100,"type":"Rest","colorType":"blue"}
 ]}
 
 

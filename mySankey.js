@@ -361,12 +361,17 @@ d3.sankey = function() {
     nodes.forEach(function(node) {
       var sy = 0, ty = 0;
       node.sourceLinks.forEach(function(link) {
-        link.sy = sy;
-        sy += link.dy;
+        //link.sy = sy;
+        //sy += link.dy;
+        link.sy = sy
+        sy += link.value;
       });
       node.targetLinks.forEach(function(link) {
+        //link.ty = ty;
+        //ty += link.dy;
         link.ty = ty;
-        ty += link.dy;
+        ty += link.value;
+
       });
     });
 
@@ -378,6 +383,8 @@ d3.sankey = function() {
       return a.target.y - b.target.y;
     }
   }
+
+  //End compute link height (depth)
 
   function center(node) {
     return node.y + node.dy / 2;

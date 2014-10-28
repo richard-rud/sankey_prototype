@@ -111,9 +111,9 @@ footer {
 <script>
 
 //Create scale functions
-      var xScale = d3.scale.linear()
+      /*var xScale = d3.scale.linear()
                  .domain([1, 1000])
-                 .range([1, 1000]);
+                 .range([1, 1000]);*/
 
       var yScale = d3.scale.linear()
                  .domain([1, 400])
@@ -138,8 +138,8 @@ var svg = d3.select("#chart").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var sankey = d3.sankey()
-    .nodeWidth(50)
-    .nodePadding(10)
+    .nodeWidth(30)
+    .nodePadding(0)
     //.size([width, height]);
     .size([width, height]);
     
@@ -155,7 +155,7 @@ function readFile(file) {
         sankey
           .nodes(graph.nodes)
           .links(graph.links)
-          .layout(32);
+          .layout(30);
       
 
 
@@ -167,14 +167,19 @@ function readFile(file) {
             .attr("d", path)
             .style("stroke-width", function(d) { return yScale(Math.max(1, d.dy)); })
             .sort(function(a, b) { return b.dy - a.dy; })
-            .style("stroke", function(d,i) {return color(i);});
+            //.style("stroke", function(d,i) {return color(i);});
+            //.style("stroke", function(d,i) { return d3.rgb(color(i)).brighter(2); });
+            .style("stroke", function(d) {return d.colorType}); 
+
+
   
         link.append("title")
             .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value) + "\nType: " + d.type; });
 
         var node = svg.append("g").selectAll(".node")
             .data(graph.nodes)
-            .enter().append("g")
+            .enter()
+            .append("g")
             .attr("class", "node")
             .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
             .call(d3.behavior.drag()
@@ -188,7 +193,7 @@ function readFile(file) {
             .style("fill", "#ef8a62")
             .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
             .append("title")
-            .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Stock: " + format(d.dy); }); //Changing the labels on the processes
+            .text(function(d) { return d.name + "\n" + format(d.value) + "\n" + "Stock: " + format(d.stock); }); //Changing the labels on the processes
 
         node.append("text")
             .attr("x", -6)
