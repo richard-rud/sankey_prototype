@@ -13,7 +13,7 @@
 <style>
 
 body {
-  background-color: none;
+  background-color: #ece2f0;
 }
 
 #chart {
@@ -93,8 +93,10 @@ footer {
 <button id="dataset2" class="btn btn-success btn-lg" type="button"><span class="glyphicon glyphicon-floppy-open"></span> Show dataset 2</button>
 <button id="showAllDatasets" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-open"></span> Show all datasets</button>
 <button id="removeData" class="btn btn-danger btn-lg" type="button"><span class="glyphicon glyphicon-floppy-remove"></span> Remove datasets</button>
+<a href="index.html"><button id="removeData" class="btn btn-warning btn-lg" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Back</button></a>
 
 </div>
+
 
 <p id="chart"></p>
 
@@ -103,9 +105,7 @@ footer {
   <p>This is a <a href="http://www.ntnu.no">NTNU</a> project by Richard Rud in collaboration with NTNU using the D3.js library</p>
 </footer>
 
-<!--<script src="http://d3js.org/d3.v2.js"></script>-->
 <script src="d3.js"></script>
-<!--<script src="sankey.js"></script>-->
 <script src="mySankey.js"></script>
 
 <script>
@@ -118,10 +118,6 @@ footer {
       var yScale = d3.scale.linear()
                  .domain([1, 400])
                  .range([1, 400]);
-
-
-
-
 
 var margin = {top: 60, right: 100, bottom: 60, left: 100},
     width = 1200 - margin.left - margin.right,
