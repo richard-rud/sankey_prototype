@@ -116,10 +116,10 @@ footer {
 
 <div id="buttonsStyle">
   
-<button id="dataset1" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-open"></span> Show data (components)</button>
-<button id="dataset2" class="btn btn-success btn-lg" type="button"><span class="glyphicon glyphicon-floppy-open"></span> Show data (Feedback loop)</button>
-<button id="showAllDatasets" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-open"></span> Show all datasets</button>
-<button id="removeData" class="btn btn-danger btn-lg" type="button"><span class="glyphicon glyphicon-floppy-remove"></span> Remove datasets</button>
+<button id="dataset1" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-open"></span> Load components example</button>
+<button id="dataset2" class="btn btn-success btn-lg" type="button"><span class="glyphicon glyphicon-floppy-open"></span> Load dataset 1</button>
+<button id="dataset3" class="btn btn-success btn-lg" type="button"><span class="glyphicon glyphicon-floppy-open"></span>Load dataset 2 </button>
+<button id="removeData" class="btn btn-danger btn-lg" type="button"><span class="glyphicon glyphicon-floppy-remove"></span> Remove all</button>
 <a href="index.html"><button class="btn btn-warning btn-lg" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Back</button></a>
 <button onclick="helpFunction()" class="btn btn-info btn-lg" type="button"><span class="glyphicon glyphicon-info-sign"></span> Help</button></a>
 
@@ -274,19 +274,13 @@ d3.select("#dataset2").on("click", function() {
 
   });
 
-d3.select("#showAllDatasets").on("click", function() {
+d3.select("#dataset3").on("click", function() {
 
-  datasets = ["dataset1.json", "dataset2.json"];
-  var i;
+  var jsonFile3 = "dataset3.json"  
 
-    for (i = 0; i < datasets.length; i++) {
-        
-      readFile(datasets[i]);
-
-    }
+  readFile(jsonFile3);
 
   });
-
 
 d3.select("#removeData").on("click", function() {
 
