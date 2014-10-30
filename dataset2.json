@@ -1,13 +1,13 @@
 {"nodes":[
-{"name":"Fertilizer production","stock":100},          
-{"name":"Agriculture soils","stock":4},  
-{"name":"Agriculture","stock":0},                  
-{"name":"Husbandry feed","stock":0}  
+{"name":"Fertilizer production: Layer 1","stock":100,"nodeColor":"#ff7f00"},          
+{"name":"Agriculture soils: Layer 1","stock":4,"nodeColor":"#ff7f00"},  
+{"name":"Agriculture: Layer 1","stock":0,"nodeColor":"#ff7f00"},                  
+{"name":"Husbandry feed: Layer 1","stock":0,"nodeColor":"#ff7f00"}  
 ],
 "links":[
 {"source":0,"target":1,"value":40,"type":"Phosphorus","colorType":"#ff7f00"},
 {"source":1,"target":2,"value":50,"type":"Phosphorus","colorType":"#ff7f00"},
-{"source":2,"target":1,"value":10,"type":"Phosphorus","colorType":"#ff7f00"},
+{"source":2,"target":1,"value":20,"type":"Phosphorus","colorType":"#ff7f00"},
 {"source":2,"target":3,"value":70,"type":"Phosphorus","colorType":"#ff7f00"}
 ]}
 

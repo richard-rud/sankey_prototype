@@ -225,7 +225,7 @@ function readFile(file) {
         node.append("rect") 
             .attr("height", function(d) { return yScale(d.dy); })
             .attr("width", sankey.nodeWidth())
-            .style("fill", "#ef8a62")
+            .style("fill", function(d) {return d.nodeColor})
             .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
             .append("title");
            
