@@ -6,8 +6,8 @@
 ],
 "links":[
 {"source":0,"target":1,"value":200,"type":"Phosphorus","colorType":"#2ca25f"},
-{"source":1,"target":2,"value":100,"type":"Phosphorus","colorType":"#2ca25f"},
+{"source":1,"target":2,"value":250,"type":"Phosphorus","colorType":"#2ca25f"},
 {"source":2,"target":1,"value":50,"type":"Phosphorus","colorType":"#2ca25f"},
-{"source":2,"target":3,"value":50,"type":"Phosphorus","colorType":"#2ca25f"}
+{"source":2,"target":3,"value":200,"type":"Phosphorus","colorType":"#2ca25f"}
 ]}
 
