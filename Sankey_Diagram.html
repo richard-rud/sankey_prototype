@@ -48,7 +48,6 @@ footer {
 
 .link {
   fill: none;
-  /*stroke: steelblue;*/
   stroke-opacity: .2;
 }
 
@@ -56,8 +55,7 @@ footer {
 
 .cycleLink {
   fill: none;
-  /*stroke: green;*/
-  stroke-opacity: .20;
+  stroke-opacity: .2;
 }
  
 .cycleLink:hover {
@@ -133,7 +131,7 @@ footer {
 </footer>
 
 <script src="d3.js"></script>
-<script src="mySankey.js"></script>
+<script src="sankey_v2.js"></script>
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
 <script>
@@ -208,7 +206,7 @@ function readFile(file) {
             .style("stroke", function(d) {return d.colorType})
             .on('mouseover', tip_1.show)
             .on('mouseout', tip_1.hide); 
- 
+
         var node = svg.append("g").selectAll(".node")
             .data(graph.nodes)
             .enter()
