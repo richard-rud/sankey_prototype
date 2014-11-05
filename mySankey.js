@@ -7,10 +7,10 @@ d3.sankey = function() {
       links = [],
 	  // cycle features
 	  cycleLaneNarrowWidth = 0, //
-	  cycleLaneDistFromFwdPaths = -30,  // the distance above the paths to start showing 'cycle lanes'
-	  cycleDistFromNode = 30,      // linear path distance before arcing from node
-    cycleControlPointDist = 30,  // controls the significance of the cycle's arc
-	  cycleSmallWidthBuffer = 2  // distance between 'cycle lanes'
+	  cycleLaneDistFromFwdPaths = -40,  // the distance above the paths to start showing 'cycle lanes'
+	  cycleDistFromNode = 60,      // linear path distance before arcing from node
+    cycleControlPointDist = 0,  // controls the significance of the cycle's arc
+	  cycleSmallWidthBuffer = 2;  // distance between 'cycle lanes'
 	  
   sankey.nodeWidth = function(_) {
     if (!arguments.length) return nodeWidth;
@@ -88,61 +88,61 @@ d3.sankey = function() {
     return sankey;
   };
 
-  sankey.link = function() {
+    sankey.link = function() {
     var curvature = .5;
 
     function link(d) {
     if( d.causesCycle ) {
       // cycle node; reaches backward
-    
+
       /*
-      The path will look like this, where 
+      The path will look like this, where
       s=source, t=target, ?q=quadratic focus point
      (wq)-> /-----n-----\
             |w          |
-            |           e 
+            |           e
             \-t         |
                      s--/ <-(eq)
       */
       // Enclosed shape using curves n' stuff
       var smallWidth = cycleLaneNarrowWidth,
-	    
-	    s_x = d.source.x + d.source.dx + d.source.dx, //her går flowen utover, kun plassering, ingen endring på flowen
-	    s_y = d.source.y + d.sy + d.dy / 2,
-		  t_x = d.target.x,
-      t_y = d.target.y + d.ty + d.dy / 2,
-		se_x = s_x + cycleDistFromNode,
-		se_y = s_y,
-		ne_x = se_x,
-		ne_y = cycleLaneDistFromFwdPaths - (d.cycleIndex * (smallWidth + cycleSmallWidthBuffer)),  // above regular paths, in it's own 'cycle lane', with a buffer around it
-		nw_x = t_x - cycleDistFromNode,
-		nw_y = ne_y,
-		sw_x = nw_x,
-    sw_y = t_y; 
-    //sw_y = t_y + d.ty + d.dy;
 
-		
+      s_x = d.source.x + d.source.dx,
+      s_y = d.source.y + d.sy + d.dy * 1.50,
+      t_x = d.target.x - d.source.dx * 0.40,
+      t_y = d.target.y + d.sy + d.dy * 0.50,
+    se_x = s_x + cycleDistFromNode + cycleDistFromNode,
+    se_y = s_y,
+    ne_x = se_x,
+    ne_y = cycleLaneDistFromFwdPaths - (d.cycleIndex * (smallWidth + cycleSmallWidthBuffer) ),  // above regular paths, in it's own 'cycle lane', with a buffer around it
+    nw_x = t_x - cycleDistFromNode,
+    nw_y = ne_y,
+    sw_x = nw_x,
+    sw_y = t_y + d.ty + d.dy * 0.01;
+
       // start the path on the outer path boundary
-	  return "M" + s_x + "," + s_y
-		+ "L" + se_x + "," + se_y
-		+ "C" + (se_x + cycleControlPointDist) + "," + se_y + " " + (ne_x + cycleControlPointDist) + "," + ne_y + " " + ne_x + "," + ne_y
-		+ "H" + nw_x
-		+ "C" + (nw_x - cycleControlPointDist) + "," + nw_y + " " + (sw_x - cycleControlPointDist) + "," + sw_y + " " + sw_x + "," + sw_y
-		+ "H" + t_x 
-		//moving to inner path boundary
-		+ "V" + ( t_y + d.ty )
-		+ "H" + sw_x 
-		+ "C" + (sw_x - (cycleControlPointDist/2) + smallWidth) + "," + t_y + " " + 
-		        (nw_x - (cycleControlPointDist/2) + smallWidth) + "," + (nw_y + smallWidth) + " " + 
-				nw_x + "," + (nw_y + smallWidth)
-		+ "H" + (ne_x - smallWidth)
-		+ "C" + (ne_x + (cycleControlPointDist/2) - smallWidth) + "," + (ne_y + smallWidth) + " " + 
-		        (se_x + (cycleControlPointDist/2) - smallWidth) + "," + (se_y - d.dy) + " " + 
-				se_x + "," + (se_y - d.dy)
-		+ "L" + s_x + "," + (s_y - d.dy);
-    
-    } else {
+    return "M" + s_x + "," + s_y
+    + "L" + se_x + "," + se_y
+    + "C" + (se_x + cycleControlPointDist) + "," + se_y + " " + (ne_x + cycleControlPointDist) + "," + ne_y + " " + ne_x + "," + ne_y
+    + "H" + nw_x
+    + "C" + (nw_x - cycleControlPointDist) + "," + nw_y + " " + (sw_x - cycleControlPointDist) + "," + sw_y + " " + sw_x + "," + sw_y
+    + "H" + t_x
+    //moving to inner path boundary
+    + "V" + ( t_y + d.ty )
+    + "H" + sw_x
+    + "C" + (sw_x - (cycleControlPointDist/2) + smallWidth) + "," + t_y + " " +
+            (nw_x - (cycleControlPointDist/2) + smallWidth) + "," + (nw_y + smallWidth) + " " +
+        nw_x + "," + (nw_y + smallWidth)
+    + "H" + (ne_x - smallWidth)
+    + "C" + (ne_x + (cycleControlPointDist/2) - smallWidth) + "," + (ne_y + smallWidth) + " " +
+            (se_x + (cycleControlPointDist/2) - smallWidth) + "," + (se_y - d.dy) + " " +
+        se_x + "," + (se_y - d.dy)
+    + "L" + s_x + "," + (s_y - d.dy);
+
+            } else {
+      
       // regular forward node
+      
       var x0 = d.source.x + d.source.dx,
           x1 = d.target.x,
           xi = d3.interpolateNumber(x0, x1),
@@ -155,7 +155,7 @@ d3.sankey = function() {
            + " " + x3 + "," + y1
            + " " + x1 + "," + y1;
     }
-  }
+    }
 
     link.curvature = function(_) {
       if (!arguments.length) return curvature;
