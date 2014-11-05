@@ -137,7 +137,7 @@ footer {
 <script>
 
 var margin = {top: 1, right: 1, bottom: 6, left: 1},
-    width = 960 - margin.left - margin.right,
+    width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var formatNumber = d3.format(",.0f"),
@@ -145,7 +145,7 @@ var formatNumber = d3.format(",.0f"),
     color = d3.scale.category20();
 
 var sankey = d3.sankey()
-    .nodeWidth(40)
+    .nodeWidth(80)
     .nodePadding(10)
     .size([width, height]);
 
@@ -162,10 +162,9 @@ var rootGraphic = svg
 
 var path = sankey.link();
 
-
-  ///////////////////////////////
+//////////////////
 ///End tooltip///
-//////////////////////////////
+/////////////////
 
 var tip_1 = d3.tip()
   .attr('class', 'd3-tip')
@@ -185,9 +184,9 @@ var tip_1 = d3.tip()
 
   svg.call(tip_2);
 
-  ///////////////////////////////
+//////////////////
 ///End tooltip///
-//////////////////////////////
+/////////////////
 
 ///////////////////////////////
 ///Start function, read data///
@@ -219,9 +218,6 @@ function readFile(file) {
   link.filter( function(d) { return !d.causesCycle} )
   .style("stroke-width", function(d) { return Math.max(1, d.dy); });
 
-  link.append("title")
-      .text(function(d) { return d.source.name + " -> " + d.target.name + "\n" + format(d.value); });
-
   var node = allgraphics.append("g").attr("id", "node-container").selectAll(".node")
       .data(graph.nodes)
       .enter().append("g")
@@ -238,20 +234,15 @@ function readFile(file) {
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
       .style("fill", function(d) { return d.nodeColor})
-      .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
-      .append("title")
-      .text(function(d) { return d.name + "\n" + format(d.value); });
+      .style("stroke", function(d) { return d3.rgb(d.color).darker(2); });
 
-  node.append("text")
-      .attr("x", -6)
-      .attr("y", function(d) { return d.dy / 2; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", "end")
-      .attr("transform", null)
-      .text(function(d) { return d.name; })
-      .filter(function(d) { return d.x < width / 2; })
-      .attr("x", 6 + sankey.nodeWidth())
-      .attr("text-anchor", "start");
+//Text for the different nodes (processes)
+
+      node.append("text")
+        .attr("x", -30)
+        .attr("y", function(d) { return d.dy + 15; })
+        .attr("transform", null)
+        .text(function(d) { return d.name; });
 
   function dragmove(d) {
 
