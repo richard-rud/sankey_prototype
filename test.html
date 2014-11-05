@@ -4,13 +4,39 @@
 
 <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
 <script type="text/javascript" src="sankey_v2.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
-<title>Sankey Diagram</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+<title>Sankey project NTNU</title>
+
 <style>
 
-#chart {
-  height: 800px;
+body {
+  background-color: #ece2f0;
 }
+
+#chart {
+  height: 600px;
+  width: 1200px;
+  margin: 20px;
+  background-color: white;
+  border: solid;
+  border-style: groove;
+}
+
+#buttonsStyle {
+margin: 24px;
+padding: 10px;
+}
+
+footer {
+  margin: 24px;
+  padding: 10px;
+}
+
 
 .node rect {
   cursor: move;
@@ -29,9 +55,10 @@
   stroke-opacity: .2;
 }
 
+/** .cycleLink changes the stroke color, fill + opacity of the cycle flows**/
 
 .cycleLink {
-  fill: #600;
+  fill: #e31a1c;
   opacity: .2;
   stroke: none;
   stroke-linejoin: "round";
@@ -45,24 +72,67 @@
   stroke-opacity: .5;
 }
 
+.node:hover {
+  stroke-opacity: .50;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
 </style>
 </head>
 <body>
 
-<h2>Random Chart</h2>
-<p>The chart below is made from randomly generated data.
-If it looks strange, try refreshing a few times.
+<header>
+  
+</header>
 
-</p>
-<p>
-The hope is to generate cycles in the data.
-The cycles are styled as red to call them out for this example.
-This rendering contains what I arrived at as the most reasonable
-representation of cycles, featuring a smaller 'lane' at the top
-of the chart where cycles travel.
-</p>
+<title>Norwegian P model: Prototype</title>
+
+<div id="buttonsStyle">
+  
+<button id="dataset1" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-open"></span> Load components example</button>
+<button id="dataset2" class="btn btn-success btn-lg" type="button"><span class="glyphicon glyphicon-floppy-open"></span> Load dataset 1</button>
+<button id="dataset3" class="btn btn-success btn-lg" type="button"><span class="glyphicon glyphicon-floppy-open"></span>Load dataset 2 </button>
+<button id="removeData" class="btn btn-danger btn-lg" type="button"><span class="glyphicon glyphicon-floppy-remove"></span> Remove all</button>
+<a href="index.html"><button class="btn btn-warning btn-lg" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Back</button></a>
+<button onclick="helpFunction()" class="btn btn-info btn-lg" type="button"><span class="glyphicon glyphicon-info-sign"></span> Help</button></a>
+
+</div>
 
 <p id="chart"></p>
+
+<footer>
+  <aside>October, 2014</aside>
+  <p>This is a <a href="http://www.ntnu.no">NTNU</a> project by Richard Rud in collaboration with NTNU using the D3.js library</p>
+</footer>
 
 <script>
 
@@ -71,11 +141,11 @@ var margin = {top: 1, right: 1, bottom: 6, left: 1},
     height = 500 - margin.top - margin.bottom;
 
 var formatNumber = d3.format(",.0f"),
-    format = function(d) { return formatNumber(d) + " tuples"; },
+    format = function(d) { return formatNumber(d) + " ton"; },
     color = d3.scale.category20();
 
 var sankey = d3.sankey()
-    .nodeWidth(15)
+    .nodeWidth(40)
     .nodePadding(10)
     .size([width, height]);
 
@@ -90,49 +160,86 @@ var rootGraphic = svg
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
 var path = sankey.link();
 
-function createChart( energy ) {
+
+  ///////////////////////////////
+///End tooltip///
+//////////////////////////////
+
+var tip_1 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p><span style='color:white'>" + d.source.name + " → " + d.target.name + "</p>" + "</p>" + format(d.value) + "</p>" + "Type: " + d.type + "</span>";
+  });
+
+  svg.call(tip_1);
+
+  var tip_2 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p><span style='color:white'>" + d.name + "</p>" + format(d.value) + "<p>" + "</p>" + "Stock: " + format(d.stock) + "</span>";
+  })
+
+  svg.call(tip_2);
+
+  ///////////////////////////////
+///End tooltip///
+//////////////////////////////
+
+///////////////////////////////
+///Start function, read data///
+//////////////////////////////
+
+function readFile(file) {
+
+        d3.json(file, function(graph) {
+ 
   sankey
-      .nodes(energy.nodes)
-      .links(energy.links)
-      .layout(32);
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .layout(30);
 
   var allgraphics = svg.append("g").attr("id", "node-and-link-container" );
 
   var link = allgraphics.append("g").attr("id", "link-container")
       .selectAll(".link")
-      .data(energy.links)
-    .enter().append("path")
+      .data(graph.links)
+      .enter().append("path")
       .attr("class", function(d) { return (d.causesCycle ? "cycleLink" : "link") })
       .attr("d", path)
-    .sort(function(a, b) { return b.dy - a.dy; })
-      ;
+      .sort(function(a, b) { return b.dy - a.dy; })
+      .style("stroke", function(d) {return d.colorType})
+      .on('mouseover', tip_1.show)
+      .on('mouseout', tip_1.hide);
+      
 
   link.filter( function(d) { return !d.causesCycle} )
-  .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+  .style("stroke-width", function(d) { return Math.max(1, d.dy); });
 
   link.append("title")
       .text(function(d) { return d.source.name + " -> " + d.target.name + "\n" + format(d.value); });
 
-  var node = allgraphics.append("g").attr("id", "node-container")
-      .selectAll(".node")
-      .data(energy.nodes)
-    .enter().append("g")
+  var node = allgraphics.append("g").attr("id", "node-container").selectAll(".node")
+      .data(graph.nodes)
+      .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-    .call(d3.behavior.drag()
+      .call(d3.behavior.drag()
       .origin(function(d) { return d; })
       .on("dragstart", function() { this.parentNode.appendChild(this); })
-      .on("drag", dragmove));
+      .on("drag", dragmove))
+      .on('mouseover', tip_2.show)
+      .on('mouseout', tip_2.hide);
 
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
+      .style("fill", function(d) { return d.nodeColor})
       .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
-    .append("title")
+      .append("title")
       .text(function(d) { return d.name + "\n" + format(d.value); });
 
   node.append("text")
@@ -142,18 +249,9 @@ function createChart( energy ) {
       .attr("text-anchor", "end")
       .attr("transform", null)
       .text(function(d) { return d.name; })
-    .filter(function(d) { return d.x < width / 2; })
+      .filter(function(d) { return d.x < width / 2; })
       .attr("x", 6 + sankey.nodeWidth())
       .attr("text-anchor", "start");
-
-/*
-  function dragmove(d) {
-    d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
-    sankey.relayout();
-    link.attr("d", path);
-  }
-
-  */
 
   function dragmove(d) {
 
@@ -165,7 +263,6 @@ function createChart( energy ) {
     
     }
 
-  // I need to learn javascript
   var numCycles = 0;
   for( var i = 0; i< sankey.links().length; i++ ) {
     if( sankey.links()[i].causesCycle ) {
@@ -183,44 +280,50 @@ function createChart( energy ) {
     + cycleTopMarginSize + " "                     // top
     + (960 + horizontalMarginSize * 2 ) + " "     // width
     + (500 + (-1 * cycleTopMarginSize)) + " " );  // height
+});
+
 };
 
+//////////////////////////////////////////
+///End function, read and creates data///
+////////////////////////////////////////
 
+//When text is clicke update the dataset
 
-function generateRandomData() {
-  var dataObject = new Object();
+d3.select("#dataset1").on("click", function() {
 
-  var mostNodes = 20;
-  var mostLinks = 40;
-  var numNodes = Math.floor((Math.random()*mostNodes)+1);
-  var numLinks = Math.floor((Math.random()*mostLinks)+1);
+  var jsonFile1 = "dataset1.json"  
 
-  // Generate nodes
-  dataObject.nodes = new Array();
-  for( var n = 0; n < numNodes; n++ ) {
-    var node = new Object();
-  node.name = "Node-" + n;
-    dataObject.nodes[n] = node;
-  }
+  readFile(jsonFile1);
 
-  // Generate links
-  dataObject.links = new Array();
-  for( var i = 0; i < numLinks; i++ ) {
-    var link = new Object();
-  link.target = link.source = Math.floor((Math.random()*numNodes));
-  while( link.source === link.target ) { link.target = Math.floor((Math.random()*numNodes)); }
-  link.value = Math.floor((Math.random() * 100) + 1);
+  });
 
-    dataObject.links[i] = link;
-  }
+d3.select("#dataset2").on("click", function() {
 
-  return dataObject;
+  var jsonFile2 = "dataset2.json"  
+
+  readFile(jsonFile2);
+
+  });
+
+d3.select("#dataset3").on("click", function() {
+
+  var jsonFile3 = "dataset3.json"  
+
+  readFile(jsonFile3);
+
+  });
+
+d3.select("#removeData").on("click", function() {
+
+  svg.selectAll("*").remove();
+
+  });
+
+function helpFunction() {
+    alert("This prototype uses two datasets with random values. To see more information, move your mouse over the flow or process you are interested in. You can also rearrange the processes by pressing your mouse and drag it around.");
 }
 
-var energyData = generateRandomData();
-
-
-createChart( energyData );
 </script>
 </body>
 </html>
