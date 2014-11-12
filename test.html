@@ -230,6 +230,14 @@ function readFile(file) {
       .on('mouseover', tip_2.show)
       .on('mouseout', tip_2.hide);
 
+      node.append("image")
+    .attr("xlink:href", "farmer.png")
+    .attr("x", 10)
+    .attr("y", function(d) { return d.dy - 70; })
+    .attr("transform", null)
+    .attr("width", 64)
+    .attr("height", 64);
+
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
