@@ -1,5 +1,5 @@
 {"nodes":[
-{"name":"Fertilizer production: Layer 1","stock":100,"nodeColor":"#ff7f00"},          
+{"name":"Fertilizer production: Layer 1","stock":100,"nodeColor":"#FFFFFF"},          
 {"name":"Agriculture soils: Layer 1","stock":4,"nodeColor":"#ff7f00"},  
 {"name":"Agriculture: Layer 1","stock":0,"nodeColor":"#ff7f00"},                  
 {"name":"Husbandry feed: Layer 1","stock":0,"nodeColor":"#ff7f00"}  

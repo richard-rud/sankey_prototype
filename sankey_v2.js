@@ -258,7 +258,15 @@ d3.sankey = function() {
       resolveCollisions();
     }
 
+    /*
     function initializeNodeDepth() {
+      var ky = d3.min(nodesByBreadth, function(nodes) {
+        return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
+      });
+
+      */
+
+      function initializeNodeDepth() {
       var ky = d3.min(nodesByBreadth, function(nodes) {
         return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
       });
@@ -266,14 +274,16 @@ d3.sankey = function() {
       nodesByBreadth.forEach(function(nodes) {
         nodes.forEach(function(node, i) {
           node.y = i;
-          //node.dy = node.value * ky;
-          node.dy = node.value;
+          node.dy = node.value * ky;
+          //node.dy = node.value * 100;
+          //node.dy = node.value;
         });
       });
 
       links.forEach(function(link) {
-        //link.dy = link.value * ky;
-        link.dy = link.value;
+        link.dy = link.value * ky;
+        //link.dy = link.value * 100;
+        //link.dy = link.value;
       });
     }
 

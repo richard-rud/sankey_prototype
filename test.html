@@ -136,7 +136,7 @@ footer {
 
 <script>
 
-var margin = {top: 1, right: 1, bottom: 6, left: 1},
+var margin = {top: 1, right: 1, bottom: 30, left: 1},
     width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -150,6 +150,8 @@ var sankey = d3.sankey()
     .size([width, height]);
 
 
+
+//Create SVG element
 
 var svg = d3.select("#chart").append("svg")
   .attr( "preserveAspectRatio", "xMinYMid meet" )
@@ -201,7 +203,8 @@ function readFile(file) {
       .links(graph.links)
       .layout(30);
 
-  var allgraphics = svg.append("g").attr("id", "node-and-link-container" );
+ 
+  var allgraphics = svg.append("g").attr("id", "node-and-link-container" )
 
   var link = allgraphics.append("g").attr("id", "link-container")
       .selectAll(".link")
@@ -214,9 +217,8 @@ function readFile(file) {
       .on('mouseover', tip_1.show)
       .on('mouseout', tip_1.hide);
       
-
   link.filter( function(d) { return !d.causesCycle} )
-  .style("stroke-width", function(d) { return Math.max(1, d.dy); });
+    .style("stroke-width", function(d) { return Math.max(1, d.dy); });
 
   var node = allgraphics.append("g").attr("id", "node-container").selectAll(".node")
       .data(graph.nodes)
@@ -230,13 +232,13 @@ function readFile(file) {
       .on('mouseover', tip_2.show)
       .on('mouseout', tip_2.hide);
 
-      node.append("image")
-    .attr("xlink:href", "farmer.png")
-    .attr("x", 10)
-    .attr("y", function(d) { return d.dy - 70; })
-    .attr("transform", null)
-    .attr("width", 64)
-    .attr("height", 64);
+    node.append("image")
+      .attr("xlink:href", "farmer.png")
+      .attr("x", 25)
+      .attr("y", function(d) { return d.dy - 40; })
+      .attr("transform", null)
+      .attr("width", 32)
+      .attr("height", 32);
 
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
@@ -279,6 +281,9 @@ function readFile(file) {
     + cycleTopMarginSize + " "                     // top
     + (960 + horizontalMarginSize * 2 ) + " "     // width
     + (500 + (-1 * cycleTopMarginSize)) + " " );  // height
+
+
+
 });
 
 };
@@ -307,7 +312,7 @@ d3.select("#dataset2").on("click", function() {
 
 d3.select("#dataset3").on("click", function() {
 
-  var jsonFile3 = "dataset3.json"  
+  var jsonFile3 = "dataset4.json"  
 
   readFile(jsonFile3);
 
