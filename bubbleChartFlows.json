@@ -1,0 +1,86 @@
+{
+ "name": "flare",
+ "children": [
+  {
+   "name": "Flow 1",
+   "children": [
+    {"name": "Organic fertilizer", "size": 19032}
+   ]
+  },
+  {
+   "name": "Flow 2",
+   "children": [
+    {"name": "Mineral fertilizer", "size": 373275}
+   ]
+  },
+  {
+   "name": "Flow 3",
+   "children": [
+    {"name": "Manure", "size": 1662577}
+   ]
+  },
+  {
+   "name": "Flow 4",
+   "children": [
+    {"name": "Seeds and planting potatoes", "size": 5981}
+   ]
+  },
+  {
+   "name": "Flow 5",
+   "children": [
+    {"name": "Plant uptake, grazing & green fodder", "size": 3347273}
+   ]
+  },
+  {
+   "name": "Flow 6",
+   "children": [
+    {"name": "No name", "size": 908824}
+   ]
+  },
+  {
+   "name": "Flow 7",
+   "children": [
+    {"name": "Manure to forest", "size": 207880}
+   ]
+  },
+  {
+   "name": "Flow 8",
+   "children": [
+    {"name": "Animal products", "size": 431724}
+   ]
+  },
+  {
+   "name": "Flow 9",
+   "children": [
+    {"name": "Plant products", "size": 88448}
+   ]
+  },
+  {
+   "name": "Flow 10",
+   "children": [
+    {"name": "No name", "size": 5519}
+   ]
+  },
+  {
+   "name": "Flow 11",
+   "children": [
+    {"name": "Fish silage and meal", "size": 13952}
+   ]
+  },
+  {
+   "name": "Flow 12",
+   "children": [
+    {"name": "Imported feed ingredients", "size": 80999}
+   ]
+  },
+  {
+   "name": "Flow 13",
+   "children": [
+    {"name": "Waste-based fertilizer", "size": 111745}
+   ]
+  }
+  
+     ]
+}
+ 
+
