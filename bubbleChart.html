@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawSeriesChart);
+
+    function drawSeriesChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['ID', 'To process', 'Value'],       
+        ['Organic fertilizer', 1, 19032],        
+        ['Mineral fertilizer', 1, 373275],        
+        ['Manure', 1, 1662577],        
+        ['Seeds and planting potatoes', 1, 5981],       
+        ['Plant uptake, grazing & green fodder', 1, 3347273],
+        ['Waste-based fertilizer',    5,           908824   ],
+        ['Manure to forest',    3,            207880  ],       
+        ['Animal products',    4,            431724  ],       
+        ['Plant products',    4,           88448   ],      
+        ['No name',    4,               5519],   
+        ['Fish silage and meal',    4,            13952  ],
+        ['Imported feed ingredients',    5,           80999   ],        
+        ['Waste-based fertilizer',    5,            111745  ]
+
+
+
+
+      ]);
+
+      var options = {
+        title: 'Correlation between life expectancy, fertility rate and population of some world countries (2010)',
+        hAxis: {title: 'To process', minValue: 0},
+        vAxis: {title: 'Value'},
+        bubble: {textStyle: {fontSize: 11}}
+      };
+
+      var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
+  </head>
+  <body>
+    <div id="series_chart_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

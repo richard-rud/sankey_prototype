@@ -7,18 +7,18 @@
 {"name":"System input: DM","stock":0,"nodeColor":"#FFFFFF"}
 ],
 "links":[
-{"source":0,"target":1,"value":0.19032,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Organic fertilizer"},
-{"source":0,"target":1,"value":0.373275,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Mineral fertilizer"},
-{"source":2,"target":1,"value":0.1662577,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Manure"},
-{"source":2,"target":1,"value":0.5981,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Seeds and planting potatoes"},
-{"source":2,"target":1,"value":0.3347273,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Plant uptake, grazing & green fodder"},
-{"source":2,"target":3,"value":0.908824,"type":"Dry Matter","colorType":"#2ca25f","flowName":"No name"},
-{"source":2,"target":4,"value":0.207880,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Manure to forest"},
-{"source":2,"target":4,"value":0.431724,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Animal products"},
-{"source":2,"target":4,"value":0.88448,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Plant products"},
-{"source":3,"target":4,"value":0.5519,"type":"Dry Matter","colorType":"#2ca25f","flowName":"No name"},
-{"source":3,"target":5,"value":0.13952,"type":"Dry Matter","colorType":"#808080","flowName":"Fish silage and meal"},
-{"source":3,"target":5,"value":0.80999,"type":"Dry Matter","colorType":"#808080","flowName":"Imported feed ingredients"},
-{"source":3,"target":5,"value":0.111745,"type":"Dry Matter","colorType":"#808080","flowName":"Waste-based fertilizer"}
+{"source":0,"target":1,"value":19032,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Organic fertilizer"},
+{"source":0,"target":1,"value":373275,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Mineral fertilizer"},
+{"source":2,"target":1,"value":1662577,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Manure"},
+{"source":2,"target":1,"value":5981,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Seeds and planting potatoes"},
+{"source":2,"target":1,"value":3347273,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Plant uptake, grazing & green fodder"},
+{"source":2,"target":3,"value":908824,"type":"Dry Matter","colorType":"#2ca25f","flowName":"No name"},
+{"source":2,"target":4,"value":207880,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Manure to forest"},
+{"source":2,"target":4,"value":431724,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Animal products"},
+{"source":2,"target":4,"value":88448,"type":"Dry Matter","colorType":"#2ca25f","flowName":"Plant products"},
+{"source":3,"target":4,"value":5519,"type":"Dry Matter","colorType":"#2ca25f","flowName":"No name"},
+{"source":3,"target":5,"value":13952,"type":"Dry Matter","colorType":"#808080","flowName":"Fish silage and meal"},
+{"source":3,"target":5,"value":80999,"type":"Dry Matter","colorType":"#808080","flowName":"Imported feed ingredients"},
+{"source":3,"target":5,"value":111745,"type":"Dry Matter","colorType":"#808080","flowName":"Waste-based fertilizer"}
 ]}
 

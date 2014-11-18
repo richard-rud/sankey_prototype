@@ -140,7 +140,8 @@ var margin = {top: 1, right: 1, bottom: 30, left: 1},
     width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var formatNumber = d3.format(",.0f"),
+//var formatNumber = d3.format(",.0f"),
+var formatNumber = d3.format(""),
     format = function(d) { return formatNumber(d) + " ton"; },
     color = d3.scale.category20();
 
@@ -148,8 +149,6 @@ var sankey = d3.sankey()
     .nodeWidth(80)
     .nodePadding(10)
     .size([width, height]);
-
-
 
 //Create SVG element
 
@@ -196,16 +195,16 @@ var tip_1 = d3.tip()
 
 function readFile(file) {
 
-        d3.json(file, function(graph) {
- 
-  sankey
-      .nodes(graph.nodes)
-      .links(graph.links)
-      .layout(30);
+//d3.json takes the file, reads it, into the script that creates the sankey diagram
 
- 
-  var allgraphics = svg.append("g").attr("id", "node-and-link-container" )
+d3.json(file, function(graph) {
 
+
+  sankey.nodes(graph.nodes).links(graph.links).layout(30); //Telling that the nodes and links of the sankey is graph.nodes and graph.links. graph is the file you are loading into this script
+
+  var allgraphics = svg.append("g").attr("id", "node-and-link-container" )//Makes a svg container
+
+//Following code creates the links
   var link = allgraphics.append("g").attr("id", "link-container")
       .selectAll(".link")
       .data(graph.links)
@@ -218,8 +217,10 @@ function readFile(file) {
       .on('mouseout', tip_1.hide);
       
   link.filter( function(d) { return !d.causesCycle} )
-    .style("stroke-width", function(d) { return Math.max(1, d.dy); });
+      .style("stroke-width", function(d) { return Math.max(1, d.dy); });
 
+
+//Following code creates the nodes
   var node = allgraphics.append("g").attr("id", "node-container").selectAll(".node")
       .data(graph.nodes)
       .enter().append("g")
@@ -282,7 +283,7 @@ function readFile(file) {
     + (960 + horizontalMarginSize * 2 ) + " "     // width
     + (500 + (-1 * cycleTopMarginSize)) + " " );  // height
 
-
+////////////////
 
 });
 
@@ -312,7 +313,7 @@ d3.select("#dataset2").on("click", function() {
 
 d3.select("#dataset3").on("click", function() {
 
-  var jsonFile3 = "dataset4.json"  
+  var jsonFile3 = "dataset3.json"  
 
   readFile(jsonFile3);
 
@@ -329,5 +330,8 @@ function helpFunction() {
 }
 
 </script>
+
+
+
 </body>
 </html>

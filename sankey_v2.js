@@ -274,15 +274,15 @@ d3.sankey = function() {
       nodesByBreadth.forEach(function(nodes) {
         nodes.forEach(function(node, i) {
           node.y = i;
-          node.dy = node.value * ky;
-          //node.dy = node.value * 100;
+          //node.dy = node.value * ky;
+          node.dy = node.value / 100000;
           //node.dy = node.value;
         });
       });
 
       links.forEach(function(link) {
-        link.dy = link.value * ky;
-        //link.dy = link.value * 100;
+        //link.dy = link.value * ky;
+        link.dy = link.value / 100000;
         //link.dy = link.value;
       });
     }
