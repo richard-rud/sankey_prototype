@@ -1,13 +1,30 @@
 {"nodes":[
-{"name":"Fertilizer production: Layer 1","stock":100,"nodeColor":"#FFFFFF"},          
-{"name":"Agriculture soils: Layer 1","stock":4,"nodeColor":"#ff7f00"},  
-{"name":"Agriculture: Layer 1","stock":0,"nodeColor":"#ff7f00"},                  
-{"name":"Husbandry feed: Layer 1","stock":0,"nodeColor":"#ff7f00"}  
+{"name":"Fertilizer production: DM","stock":0,"nodeColor":"#ff7f00"},          
+{"name":"Agriculture and greening soils: DM","stock":0,"nodeColor":"#ff7f00"},  
+{"name":"Agriculture: DM","stock":0,"nodeColor":"#ff7f00"},                  
+{"name":"Husbandry feed: DM","stock":0,"nodeColor":"#ff7f00"},	
+{"name":"System output: DM","stock":0,"nodeColor":"#ff7f00"},	
+{"name":"System input: DM","stock":0,"nodeColor":"#ff7f00"} 
 ],
 "links":[
-{"source":0,"target":1,"value":40,"type":"Phosphorus","colorType":"#ff7f00"},
-{"source":1,"target":2,"value":60,"type":"Phosphorus","colorType":"#ff7f00"},
-{"source":2,"target":3,"value":20,"type":"Phosphorus","colorType":"#ff7f00"},
-{"source":1,"target":3,"value":40,"type":"Phosphorus","colorType":"#ff7f00"}
+{"source":5,"target":0,"value":0,"type":"Dry Matter","colorType":"red","flowName":"Wast based fertilizer?"},
+{"source":5,"target":0,"value":94000,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Imported phosphate"},
+{"source":0,"target":1,"value":2500,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Organic fertilizer"},
+{"source":0,"target":1,"value":8400,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Mineral fertilizer"},
+{"source":0,"target":4,"value":86000,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Exported fertilizer"},
+{"source":5,"target":1,"value":200,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Athmospheric deposition"},
+{"source":1,"target":4,"value":1200,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Runoff"},
+{"source":1,"target":2,"value":12000,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Plant uptake"},
+{"source":2,"target":1,"value":300,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Seeds and planting potatos"},
+{"source":2,"target":1,"value":12000,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Manure"},
+{"source":2,"target":4,"value":900,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Manure to forest"},
+{"source":2,"target":4,"value":4700,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Husbandry products"},
+{"source":2,"target":4,"value":900,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Plant products"},
+{"source":2,"target":3,"value":4200,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Plant products for feed"},
+{"source":3,"target":2,"value":9600,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Husbandry and fur feed"},
+{"source":5,"target":3,"value":500,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Fish meal and slag"},
+{"source":5,"target":3,"value":100,"type":"Dry Matter","colorType":"#ff7f00","flowName":"MBM"},
+{"source":5,"target":3,"value":4400,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Imported feed"},
+{"source":3,"target":4,"value":100,"type":"Dry Matter","colorType":"#ff7f00","flowName":"Pet food"}
 ]}
 
