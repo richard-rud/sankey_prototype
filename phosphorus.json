@@ -1,0 +1,30 @@
+{"nodes":[
+{"name":"Fertilizer production: DM","stock":0,"nodeColor":"#ff7f00"},          
+{"name":"Agriculture and greening soils: DM","stock":0,"nodeColor":"#ff7f00"},  
+{"name":"Agriculture: DM","stock":0,"nodeColor":"#ff7f00"},                  
+{"name":"Husbandry feed: DM","stock":0,"nodeColor":"#ff7f00"},	
+{"name":"System output: DM","stock":0,"nodeColor":"#ff7f00"},	
+{"name":"System input: DM","stock":0,"nodeColor":"#ff7f00"} 
+],
+"links":[
+{"source":5,"target":0,"value":1,"type":"Phosphorus","colorType":"red","flowName":"Wast based fertilizer?"},
+{"source":5,"target":0,"value":94000,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Imported phosphate"},
+{"source":0,"target":1,"value":2500,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Organic fertilizer"},
+{"source":0,"target":1,"value":8400,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Mineral fertilizer"},
+{"source":0,"target":4,"value":86000,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Exported fertilizer"},
+{"source":5,"target":1,"value":200,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Athmospheric deposition"},
+{"source":1,"target":4,"value":1200,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Runoff"},
+{"source":1,"target":2,"value":12000,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Plant uptake"},
+{"source":2,"target":1,"value":300,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Seeds and planting potatos"},
+{"source":2,"target":1,"value":12000,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Manure"},
+{"source":2,"target":4,"value":900,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Manure to forest"},
+{"source":2,"target":4,"value":4700,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Husbandry products"},
+{"source":2,"target":4,"value":900,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Plant products"},
+{"source":2,"target":3,"value":4200,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Plant products for feed"},
+{"source":3,"target":2,"value":9600,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Husbandry and fur feed"},
+{"source":5,"target":3,"value":500,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Fish meal and slag"},
+{"source":5,"target":3,"value":100,"type":"Phosphorus","colorType":"#ff7f00","flowName":"MBM"},
+{"source":5,"target":3,"value":4400,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Imported feed"},
+{"source":3,"target":4,"value":100,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Pet food"}
+]}
+
