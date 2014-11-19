@@ -226,7 +226,7 @@ var tip_1 = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function(d) {
-    return "<p><span style='color:white'>" + d.source.name + " → " + d.target.name + "</p>" + "</p>" + format(d.value) + "</p>" + "Type: " + d.type + "</span>";
+    return "<p><span style='color:white'>" + d.source.name + " → " + d.target.name + "</p>" + "</p>" + format(d.value) + "</p>" + "<p>" + "Type: " + d.type + "</p>" + "Flow name: " +  d.flowName + "</span>";
   });
 
   svg.call(tip_1);
@@ -254,7 +254,6 @@ function readFile(file) {
 
 d3.json(file, function(graph) {
 
-
   sankey.nodes(graph.nodes).links(graph.links).layout(30); //Telling that the nodes and links of the sankey is graph.nodes and graph.links. graph is the file you are loading into this script
 
   var allgraphics = svg.append("g").attr("id", "node-and-link-container" )//Makes a svg container
@@ -273,7 +272,6 @@ d3.json(file, function(graph) {
       
   link.filter( function(d) { return !d.causesCycle} )
       .style("stroke-width", function(d) { return Math.max(1, d.dy); });
-
 
 //Following code creates the nodes
   var node = allgraphics.append("g").attr("id", "node-container").selectAll(".node")
@@ -451,7 +449,7 @@ var toolTip_bubbles_P = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function(d) {
-    return "<p><span style='color:white'>" + d.className + ": " + format(d.value) + "</p>" + "</span>";
+    return "<p><span style='color:white'>" + d.className + ": " + format(d.value) + " tons" + "</p>" + "</span>";
   });
 
   svg_P.call(toolTip_bubbles_P);
@@ -524,7 +522,7 @@ var toolTip_bubbles_DM = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function(d) {
-    return "<p><span style='color:white'>" + d.className + ": " + format(d.value) + "</p>" + "</span>";
+    return "<p><span style='color:white'>" + d.className + ": " + format(d.value) + " tons" + "</p>" + "</span>";
   });
 
   svg_DM.call(toolTip_bubbles_DM);
