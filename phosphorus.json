@@ -21,7 +21,7 @@
 {"source":2,"target":4,"value":4700,"type":"Phosphorus","colorType":"#808080","flowName":"Husbandry products"},
 {"source":2,"target":4,"value":900,"type":"Phosphorus","colorType":"#808080","flowName":"Plant products"},
 {"source":2,"target":3,"value":4200,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Plant products for feed"},
-{"source":3,"target":2,"value":9600,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Husbandry and fur feed (Feedback loop)"},
+{"source":3,"target":2,"value":960000,"type":"Phosphorus","colorType":"#ff7f00","flowName":"Husbandry and fur feed (Feedback loop)"},
 {"source":5,"target":3,"value":500,"type":"Phosphorus","colorType":"#808080","flowName":"Fish meal and slag"},
 {"source":5,"target":3,"value":100,"type":"Phosphorus","colorType":"#808080","flowName":"MBM"},
 {"source":5,"target":3,"value":4400,"type":"Phosphorus","colorType":"#808080","flowName":"Imported feed"},
