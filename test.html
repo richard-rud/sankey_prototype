@@ -2,14 +2,23 @@
 <html>
 <head>
 
-<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script type="text/javascript" src="sankey_v2.js"></script>
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8">
 
+
+<!-- THIS IS THE REFERENCE FOR D3.JS-->
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<!-- THIS IS THE REFERENCE FOR ACCESSING THE D3-TOOLTIP-->
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+
+<!-- THIS IS THE BOOTSTRAP CSS REFERENCE-->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+<!--Reference to the script that contains the sankey layout rules, related to the link (processes) and nodes-->
+<script type="text/javascript" src="sankey_v2.js"></script>
+
 
 <title>Sankey project NTNU</title>
 
@@ -286,6 +295,15 @@ d3.json(file, function(graph) {
       .on("drag", dragmove))
       .on('mouseover', tip_2.show)
       .on('mouseout', tip_2.hide);
+
+    link.append("text")
+      .attr("x", 25)
+      .attr("y", function(d) { return d.dy + 15; })
+      .attr("transform", null)
+      .text("testtesttesttest");
+
+
+
 
     node.append("image")
       .attr("xlink:href", "farmer.png")

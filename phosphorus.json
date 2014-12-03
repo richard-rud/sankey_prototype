@@ -1,10 +1,10 @@
 {"nodes":[
-{"name":"Fertilizer production: DM","stock":0,"nodeColor":"#ff7f00"},          
-{"name":"Agriculture and greening soils: DM","stock":0,"nodeColor":"#ff7f00"},  
-{"name":"Agriculture: DM","stock":0,"nodeColor":"#ff7f00"},                  
-{"name":"Husbandry feed: DM","stock":0,"nodeColor":"#ff7f00"},	
-{"name":"System output: DM","stock":0,"nodeColor":"#FFFFFF"},	
-{"name":"System input: DM","stock":0,"nodeColor":"#FFFFFF"} 
+{"name":"Fertilizer production: P","stock":0,"nodeColor":"#ff7f00"},          
+{"name":"Agriculture and greening soils: P","stock":0,"nodeColor":"#ff7f00"},  
+{"name":"Agriculture: P","stock":0,"nodeColor":"#ff7f00"},                  
+{"name":"Husbandry feed: P","stock":0,"nodeColor":"#ff7f00"},	
+{"name":"System output: P","stock":0,"nodeColor":"#FFFFFF"},	
+{"name":"System input: P","stock":0,"nodeColor":"#FFFFFF"} 
 ],
 "links":[
 {"source":5,"target":0,"value":1,"type":"Phosphorus","colorType":"#808080","flowName":"Wast based fertilizer?"},
