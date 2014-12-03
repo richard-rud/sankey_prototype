@@ -282,7 +282,7 @@ d3.json(file, function(graph) {
       
   link.filter( function(d) { return !d.causesCycle} )
       .style("stroke-width", function(d) { return Math.max(1, d.dy); });
-
+      
 //Following code creates the nodes
   var node = allgraphics.append("g").attr("id", "node-container").selectAll(".node")
       .data(graph.nodes)
@@ -296,15 +296,7 @@ d3.json(file, function(graph) {
       .on('mouseover', tip_2.show)
       .on('mouseout', tip_2.hide);
 
-    link.append("text")
-      .attr("x", 25)
-      .attr("y", function(d) { return d.dy + 15; })
-      .attr("transform", null)
-      .text("testtesttesttest");
-
-
-
-
+/*
     node.append("image")
       .attr("xlink:href", "farmer.png")
       .attr("x", 25)
@@ -312,6 +304,9 @@ d3.json(file, function(graph) {
       .attr("transform", null)
       .attr("width", 32)
       .attr("height", 32);
+
+      */
+
 
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
@@ -440,6 +435,10 @@ d3.json("bubbles_P.json", function(error, root) {
   node.append("circle")
       .attr("r", function(d) { return d.r; })
       .style("fill", function(d) { return color(d.packageName); });
+
+    
+
+
 
   node.append("text")
       .attr("dy", ".3em")

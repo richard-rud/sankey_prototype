@@ -4,115 +4,115 @@
   {
    "name": "Flow 1",
    "children": [
-    {"name": "Wast based fertilizer?", "size": 1}
+    {"name": "Wast based fertilizer?", "size": 1,"colorType":"red"}
    ]
   },
   {
    "name": "Flow 2",
    "children": [
-    {"name": "Imported phosphate", "size": 94000}
+    {"name": "Imported phosphate", "size": 94000,"colorType":"red"}
    ]
   },
   {
    "name": "Flow 3",
    "children": [
-    {"name": "Organic fertilizer", "size": 2500}
+    {"name": "Organic fertilizer", "size": 2500,"colorType":"blue"}
    ]
   },
   {
    "name": "Flow 4",
    "children": [
-    {"name": "Mineral fertilizer", "size": 8400}
+    {"name": "Mineral fertilizer", "size": 8400,"colorType":"red"}
    ]
   },
   {
    "name": "Flow 5",
    "children": [
-    {"name": "Exported fertilizer", "size": 86000}
+    {"name": "Exported fertilizer", "size": 86000,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 6",
    "children": [
-    {"name": "Athmospheric deposition", "size": 200}
+    {"name": "Athmospheric deposition", "size": 200,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 7",
    "children": [
-    {"name": "Runoff", "size": 1200}
+    {"name": "Runoff", "size": 1200,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 8",
    "children": [
-    {"name": "Plant uptake", "size": 12000}
+    {"name": "Plant uptake", "size": 12000,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 9",
    "children": [
-    {"name": "Seeds and planting potatos", "size": 300}
+    {"name": "Seeds and planting potatos", "size": 300,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 10",
    "children": [
-    {"name": "Manure", "size": 12000}
+    {"name": "Manure", "size": 12000,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 11",
    "children": [
-    {"name": "Manure to forest", "size": 900}
+    {"name": "Manure to forest", "size": 900,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 12",
    "children": [
-    {"name": "Husbandry products", "size": 4700}
+    {"name": "Husbandry products", "size": 4700,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 13",
    "children": [
-    {"name": "Plant products", "size": 900}
+    {"name": "Plant products", "size": 900,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 14",
    "children": [
-    {"name": "Plant products for feed", "size": 4200}
+    {"name": "Plant products for feed", "size": 4200,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 15",
    "children": [
-    {"name": "Husbandry and fur feed", "size": 9600}
+    {"name": "Husbandry and fur feed", "size": 9600,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 16",
    "children": [
-    {"name": "Fish meal and slag", "size": 500}
+    {"name": "Fish meal and slag", "size": 500,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 17",
    "children": [
-    {"name": "MBM", "size": 100}
+    {"name": "MBM", "size": 100,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 18",
    "children": [
-    {"name": "Imported feed", "size": 4400}
+    {"name": "Imported feed", "size": 4400,"colorType":"#808080"}
    ]
   },
   {
    "name": "Flow 19",
    "children": [
-    {"name": "Pet food", "size": 100}
+    {"name": "Pet food", "size": 100,"colorType":"#808080"}
    ]
   }
   
