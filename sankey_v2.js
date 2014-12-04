@@ -8,7 +8,7 @@ d3.sankey = function() {
 	  // cycle features
 	  cycleLaneNarrowWidth = 0,
 	  cycleLaneDistFromFwdPaths = -30,  // the distance above the paths to start showing 'cycle lanes'
-	  cycleDistFromNode = 60,      // linear path distance before arcing from node
+	  cycleDistFromNode = 100,      // linear path distance before arcing from node
     cycleControlPointDist = 10,  // controls the significance of the cycle's arc
 	  cycleSmallWidthBuffer = 10  // distance between 'cycle lanes'
 	  ;

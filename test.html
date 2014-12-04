@@ -7,10 +7,10 @@
 
 <!-- THIS IS THE REFERENCE FOR D3.JS-->
 <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 
 <!-- THIS IS THE REFERENCE FOR ACCESSING THE D3-TOOLTIP-->
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script type="text/javascript" src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
 
 <!-- THIS IS THE BOOTSTRAP CSS REFERENCE-->
@@ -124,8 +124,9 @@ footer {
   fill: #e31a1c;
   opacity: .2;
   stroke: none;
-  stroke-linejoin: "round";
+  stroke-linejoin: "bevel";
 }
+
 
 .cycleLink:hover {
   opacity: .5;
@@ -266,7 +267,44 @@ d3.json(file, function(graph) {
 
   sankey.nodes(graph.nodes).links(graph.links).layout(30); //Telling that the nodes and links of the sankey is graph.nodes and graph.links. graph is the file you are loading into this script
 
-  var allgraphics = svg.append("g").attr("id", "node-and-link-container" )//Makes a svg container
+var allgraphics = svg.append("g").attr("id", "node-and-link-container" )//Makes a svg container
+
+//var defs = svg.append('svg:defs')
+
+//The following code creates the paths for the arrows
+//var paths = svg.append('svg:g')
+  //  .attr('id', 'markers')
+  //  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+/*
+//The following code creates the arrows
+var marker = allgraphics.append('g').attr('id', 'link-container').selectAll('.link')
+    .data(graph.links)
+    .enter()
+    .append('svg:marker')
+    .attr('id', "arrowHead")
+    .attr('markerHeight', 0.5)
+    .attr('markerWidth', 2,5)
+    //.attr('markerUnits', 'strokeWidth')
+    .attr('orient', 'auto')
+    .attr('refX', 5)
+    .attr('refY', 0)
+    .attr('viewBox', '-5 -5 10 10')
+    .append('svg:path')
+    .attr('d', 'M 0,0 m -5,-5 L 5,0 L -5,5 Z')
+    .attr('fill', 'grey');*/
+
+  svg.append("marker")
+    .attr('id', "arrowHead")
+    .attr('markerHeight', 0.5)
+    .attr('markerWidth', 2,5)
+    //.attr('markerUnits', 'strokeWidth')
+    .attr('orient', 'auto')
+    .attr('refX', 5)
+    .attr('refY', 0)
+    .attr('viewBox', '-5 -5 10 10')
+    .append('svg:path')
+    .attr('d', 'M 0,0 m -5,-5 L 5,0 L -5,5 Z')
+    .attr('fill', 'grey');
 
 //Following code creates the links
   var link = allgraphics.append("g").attr("id", "link-container")
@@ -278,13 +316,20 @@ d3.json(file, function(graph) {
       .sort(function(a, b) { return b.dy - a.dy; })
       .style("stroke", function(d) {return d.colorType})
       .on('mouseover', tip_1.show)
-      .on('mouseout', tip_1.hide);
+      .on('mouseout', tip_1.hide)
+      .attr('marker-end', 'url(#arrowHead)');
+      //.attr('stroke-linecap', 'round')
+      //.attr('marker-start', 'url(#arrowHead')
+        
+
       
+
   link.filter( function(d) { return !d.causesCycle} )
       .style("stroke-width", function(d) { return Math.max(1, d.dy); });
-      
+  
 //Following code creates the nodes
-  var node = allgraphics.append("g").attr("id", "node-container").selectAll(".node")
+  var node = allgraphics.append("g").attr("id", "node-container")
+      .selectAll(".node")
       .data(graph.nodes)
       .enter().append("g")
       .attr("class", "node")
@@ -294,7 +339,8 @@ d3.json(file, function(graph) {
       .on("dragstart", function() { this.parentNode.appendChild(this); })
       .on("drag", dragmove))
       .on('mouseover', tip_2.show)
-      .on('mouseout', tip_2.hide);
+      .on('mouseout', tip_2.hide)
+      .style("writing-mode", "tb"); //This flips the text horizontally 
 
 /*
     node.append("image")
@@ -306,6 +352,7 @@ d3.json(file, function(graph) {
       .attr("height", 32);
 
       */
+
 
 
   node.append("rect")
@@ -321,6 +368,8 @@ d3.json(file, function(graph) {
         .attr("y", function(d) { return d.dy + 15; })
         .attr("transform", null)
         .text(function(d) { return d.name; });
+
+
 
   function dragmove(d) {
 
