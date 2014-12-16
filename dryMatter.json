@@ -1,10 +1,10 @@
 {"nodes":[
-{"name":"1. Fertilizer production: DM","stock":0,"nodeColor":"#2ca25f"},          
-{"name":"2. Agriculture and greening soils: DM","stock":0,"nodeColor":"#2ca25f"},  
-{"name":"3. Agriculture: DM","stock":0,"nodeColor":"#2ca25f"},                  
-{"name":"4. Husbandry feed: DM","stock":0,"nodeColor":"#2ca25f"},
-{"name":"Export: DM","stock":0,"nodeColor":"#FFFFFF"},
-{"name":"Import: DM","stock":0,"nodeColor":"#FFFFFF"}
+{"name":"1. Fertilizer production: DM","stock":"N/A","nodeColor":"#2ca25f"},          
+{"name":"2. Agriculture and greening soils: DM","stock":"N/A","nodeColor":"#2ca25f"},  
+{"name":"3. Agriculture: DM","stock":"N/A","nodeColor":"#2ca25f"},                  
+{"name":"4. Husbandry feed: DM","stock":"N/A","nodeColor":"#2ca25f"},
+{"name":"Export: DM","stock":"N/A","nodeColor":"#FFFFFF"},
+{"name":"Import: DM","stock":"N/A","nodeColor":"#FFFFFF"}
 ],
 "links":[
 {"source":0,"target":1,"value":19032,"type":"Dry Matter","colorType":"#c51b8a","flowName":"Organic fertilizer"},
@@ -21,4 +21,6 @@
 {"source":5,"target":3,"value":80999,"type":"Dry Matter","colorType":"#808080","flowName":"Imported feed ingredients"},
 {"source":5,"target":3,"value":111745,"type":"Dry Matter","colorType":"#808080","flowName":"Waste-based fertilizer"}
 ]}
+
+
 

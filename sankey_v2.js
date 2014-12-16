@@ -6,10 +6,10 @@ d3.sankey = function() {
       nodes = [],
       links = [],
 	  // cycle features
-	  cycleLaneNarrowWidth = 0,
-	  cycleLaneDistFromFwdPaths = -30,  // the distance above the paths to start showing 'cycle lanes'
-	  cycleDistFromNode = 100,      // linear path distance before arcing from node
-    cycleControlPointDist = 10,  // controls the significance of the cycle's arc
+	  cycleLaneNarrowWidth = 4,
+	  cycleLaneDistFromFwdPaths = -10,  // the distance above the paths to start showing 'cycle lanes'
+	  cycleDistFromNode = 30,      // linear path distance before arcing from node
+    cycleControlPointDist = 30,  // controls the significance of the cycle's arc
 	  cycleSmallWidthBuffer = 10  // distance between 'cycle lanes'
 	  ;
 
@@ -110,16 +110,16 @@ d3.sankey = function() {
 
 	    s_x = d.source.x + d.source.dx,
 	    s_y = d.source.y + d.sy + d.dy,
-		t_x = d.target.x,
-        t_y = d.target.y,
-		se_x = s_x + cycleDistFromNode,
-		se_y = s_y,
-		ne_x = se_x,
-		ne_y = cycleLaneDistFromFwdPaths - (d.cycleIndex * (smallWidth + cycleSmallWidthBuffer) ),  // above regular paths, in it's own 'cycle lane', with a buffer around it
-		nw_x = t_x - cycleDistFromNode,
-		nw_y = ne_y,
-		sw_x = nw_x,
-		sw_y = t_y + d.ty + d.dy;
+		  t_x = d.target.x,
+      t_y = d.target.y,
+		  se_x = s_x + cycleDistFromNode,
+		  se_y = s_y,
+		  ne_x = se_x,
+		  ne_y = cycleLaneDistFromFwdPaths - (d.cycleIndex * (smallWidth + cycleSmallWidthBuffer) ),  // above regular paths, in it's own 'cycle lane', with a buffer around it
+		  nw_x = t_x - cycleDistFromNode,
+		  nw_y = ne_y,
+		  sw_x = nw_x,
+		  sw_y = t_y + d.ty + d.dy;
 
       // start the path on the outer path boundary
 	  return "M" + s_x + "," + s_y
@@ -143,7 +143,7 @@ d3.sankey = function() {
     } else {
       // regular forward node
       var x0 = d.source.x + d.source.dx,
-          x1 = d.target.x,
+          x1 = d.target.x - (d.dy / 2),
           xi = d3.interpolateNumber(x0, x1),
           x2 = xi(curvature),
           x3 = xi(1 - curvature),
@@ -152,7 +152,9 @@ d3.sankey = function() {
       return "M" + x0 + "," + y0
            + "C" + x2 + "," + y0
            + " " + x3 + "," + y1
-           + " " + x1 + "," + y1;
+           + " " + x1 + "," + y1; //
+           //+ "M" + "0" + "," + "0" + "m" + "-5" + "," + "-5" + "L" + "5" + "," + "0" + "L" + "-5" + "," + "5" + "Z";
+           //+ "L" + (x1 + 1) + (y1 + 1) + "L" + "5" + "," + "0" + "L" + "5" + "," + "5";
     }
     }
 
@@ -274,16 +276,16 @@ d3.sankey = function() {
       nodesByBreadth.forEach(function(nodes) {
         nodes.forEach(function(node, i) {
           node.y = i;
-          //node.dy = node.value * ky;
+          //node.dy = node.value * ky; //Modify the code so that not the biggest node determines the max size
           node.dy = node.value / 100000 * 6;
-          //node.dy = node.value;
+          //node.dy = node.value; 
         });
       });
 
       links.forEach(function(link) {
-        //link.dy = link.value * ky;
+        //link.dy = link.value * ky; //Modify the code so that not the biggest node determines the max size
         link.dy = link.value / 100000 * 6;
-        //link.dy = link.value;
+        //link.dy = link.value; 
       });
     }
 

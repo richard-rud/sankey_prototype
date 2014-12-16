@@ -1,0 +1,19 @@
+var gradient = svg.append("svg:defs")
+.append("svg:linearGradient")
+.attr("id", "gradient")
+.attr("x1", "0%")
+.attr("y1", "0%")
+.attr("x2", "100%")
+.attr("y2", "100%")
+.attr("d", "M70 50L170 150")
+.attr("spreadMethod", "pad");
+
+gradient.append("svg:stop")
+.attr("offset", "0%")
+.attr("stop-color", "#eee")
+.attr("stop-opacity", 1);
+
+gradient.append("svg:stop")
+.attr("offset", "100%")
+.attr("stop-color", "#000")
+.attr("stop-opacity", 1); 
